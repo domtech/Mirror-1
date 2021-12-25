@@ -47,9 +47,12 @@ namespace Mirror
             //     add new to dirty
             foreach (NetworkIdentity identity in NetworkServer.spawned.Values)
             {
+                if(!lastObjectScene.ContainsKey(identity))
+                    continue;
                 Scene currentScene = lastObjectScene[identity];
+
                 Scene newScene = identity.gameObject.scene;
-                if (newScene == currentScene) 
+                if (newScene == currentScene)
                     continue;
 
                 // Mark new/old scenes as dirty so they get rebuilt
